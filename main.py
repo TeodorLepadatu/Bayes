@@ -2,7 +2,7 @@
 def read_csv(file):
     data = []
     with open(file, "r", encoding='utf-8') as f:
-        titles = f.readline().strip().replace('"', '').split(";")
+        titles = f.readline().strip().replace('"', '').split(";")   #n am nevoie de titluri
         line = f.readline()
         while line:
             line = line.strip().replace('"', '').replace('.',' ').replace('/', ' ').replace('(', ' ').replace(')',' ').replace('…', ' ').replace('>', ' ').replace('*', ' ').replace(',', ' ').replace('<', ' ').replace('?', ' ').split(";")
@@ -19,21 +19,21 @@ def add_to_dict(dict, *lists):
             if word in dict:
                 dict[word] += 1
             else:
-                dict[word] = 1
+                dict[word] = 2
 
 def parse_data(data, dict_pos, dict_neg):
-    global no_pos, no_neg, no_total
+    global no_msg_pos, no_msg_neg, no_msg_total
     for i in range (len(data)):
         words_title  = [x.strip(",*:“”!/?'. ()[]_’‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][0].split()]
         words_text = [x.strip(",:*“”!/?'. ()[]’_‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][1].split()]
         try:
             if int(data[i][2]) == 0:
                 add_to_dict(dict_neg, words_title, words_text)
-                no_neg += 1
+                no_msg_neg += 1
             else:
                 add_to_dict(dict_pos, words_title, words_text)
-                no_pos += 1
-            no_total += 1
+                no_msg_pos += 1
+            no_msg_total += 1
         except:
             pass
 
@@ -42,16 +42,51 @@ def prob_word(dict):
     no_words = sum(dict.values())
     for key in dict.keys():
         dict[key] = round(dict[key] / no_words, 10)
+    return no_words
+
+def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
+    global no_msg_pos, no_msg_neg, no_msg_total
+    data = read_csv(file)
+    nrcorecte = 0
+    for i in range (len(data)):
+        words_title = [x.strip(",*:“”!/?'. ()[]_’‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][0].split()]
+        words_text = [x.strip(",:*“”!/?'. ()[]’_‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][1].split()]
+        prob_pos = no_msg_pos / no_msg_total
+        prob_neg = no_msg_neg / no_msg_total
+        for word in words_title:
+            if word not in dict_pos:
+                dict_pos[word] = 1 / no_words_pos
+            if word not in dict_neg:
+                dict_neg[word] = 1 / no_words_neg
+            prob_pos *= dict_pos[word]
+            prob_neg *= dict_neg[word]
+        for word in words_text:
+            if word not in dict_pos:
+                dict_pos[word] = 1 / no_words_pos
+            if word not in dict_neg:
+                dict_neg[word] = 1 / no_words_neg
+            prob_pos *= dict_pos[word]
+            prob_neg *= dict_neg[word]
+        ans = prob_pos > prob_neg
+        try:
+            nrcorecte+=(ans==int(data[i][2]))
+        except:
+            pass
+    return nrcorecte/len(data)
 
 if __name__ == '__main__':
+
     data = read_csv("Reddit_Combi.csv")
-    # print(data[0])
+    #print(data[0])
     dict_pos = {}
     dict_neg = {}
-    no_pos = no_neg = no_total = 0
+    no_msg_pos = no_msg_neg = no_msg_total = 0
     parse_data(data, dict_pos, dict_neg)
-    prob_word(dict_pos)
-    prob_word(dict_neg)
+    no_words_pos = prob_word(dict_pos)
+    no_words_neg = prob_word(dict_neg)
+    #prob_word(dict_pos)
+    #prob_word(dict_neg)
+    print(testare("database.csv", dict_pos, dict_neg, no_words_pos, no_words_neg))
     # print(no_pos / no_total)
    # print(no_neg)
    #  print(no_total)
@@ -59,4 +94,3 @@ if __name__ == '__main__':
     # print(dict_neg)
     #print(len(dict_pos))
     #print(len(dict_neg))
-
