@@ -64,8 +64,6 @@ def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
             prob_pos = np.float64(prob_pos * dict_pos[word]) * offset
             prob_neg = np.float64(prob_neg *dict_neg[word]) * offset
         for word in words_text:
-            if word == 'yes':
-                print(prob_pos,prob_neg,dict_pos[word],dict_neg[word])
             if word not in dict_pos:
                 dict_pos[word] = np.float64(1 / no_words_pos) * offset
             if word not in dict_neg:
