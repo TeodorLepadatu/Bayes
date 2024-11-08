@@ -7,7 +7,7 @@ def read_csv(file):
     while line:
         line = line.strip().split(";")
         line.pop()
-        line[2]=line[3]
+        line[2]=line[3] #pt format
         line.pop()
         data.append(line)
         line=f.readline()
