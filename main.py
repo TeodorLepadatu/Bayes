@@ -1,4 +1,7 @@
 import numpy as np
+
+offset = 10**(10)
+
 def read_csv(file):
     data = []
     with open(file, "r", encoding='utf-8') as f:
@@ -41,7 +44,7 @@ def parse_data(data, dict_pos, dict_neg):
 def prob_word(dict):
     no_words = sum(dict.values())
     for key in dict.keys():
-        dict[key] = dict[key] / no_words
+        dict[key] = np.float64(dict[key] / no_words) * offset
     return no_words
 
 def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
@@ -51,26 +54,26 @@ def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
     for i in range (len(data)):
         words_title = [x.strip(",*:“”!/?'. ()[]_’‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][0].split()]
         words_text = [x.strip(",:*“”!/?'. ()[]’_‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][1].split()]
-        prob_pos = no_msg_pos / no_msg_total
-        prob_neg = no_msg_neg / no_msg_total
+        prob_pos = np.float64(no_msg_pos / no_msg_total) * offset
+        prob_neg = np.float64(no_msg_neg / no_msg_total)* offset
         for word in words_title:
             if word not in dict_pos:
-                dict_pos[word] = 1 / no_words_pos
+                dict_pos[word] = np.float64(1 / no_words_pos) * offset
             if word not in dict_neg:
-                dict_neg[word] = 1 / no_words_neg
-            prob_pos *= dict_pos[word]
-            prob_neg *= dict_neg[word]
+                dict_neg[word] = np.float64(1 / no_words_neg) * offset
+            prob_pos = np.float64(prob_pos * dict_pos[word]) * offset
+            prob_neg = np.float64(prob_neg *dict_neg[word]) * offset
         for word in words_text:
             '''
             if word == 'yes':
                 print(prob_pos,prob_neg,dict_pos[word],dict_neg[word])
             '''
             if word not in dict_pos:
-                dict_pos[word] = 1 / no_words_pos
+                dict_pos[word] = np.float64(1 / no_words_pos) * offset
             if word not in dict_neg:
-                dict_neg[word] = 1 / no_words_neg
-            prob_pos *= dict_pos[word]
-            prob_neg *= dict_neg[word]
+                dict_neg[word] = np.float64(1 / no_words_neg) * offset
+            prob_pos = np.float64(prob_pos * dict_pos[word]) * offset
+            prob_neg = np.float64(prob_neg * dict_neg[word]) * offset
             '''
             if (prob_pos == 0):
                 print(word)
