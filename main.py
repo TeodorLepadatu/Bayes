@@ -72,16 +72,6 @@ def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
                 dict_neg[word] = np.float64(1 / no_words_neg) * offset
             prob_pos = np.float64(prob_pos * dict_pos[word]) * offset
             prob_neg = np.float64(prob_neg * dict_neg[word]) * offset
-            '''
-            if (prob_pos == 0):
-                print(word)
-                print("TIP CA SUNT 0")
-                break
-            if (prob_neg == 0):
-                print(word)
-                print("TIP CA SUNT 0")
-                break
-            '''
         ans = prob_pos > prob_neg
         try:
             nrcorecte+=(ans==int(data[i][2]))
@@ -92,21 +82,10 @@ def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
 if __name__ == '__main__':
 
     data = read_csv("Reddit_Combi.csv")
-    #print(data[0])
     dict_pos = {}
     dict_neg = {}
     no_msg_pos = no_msg_neg = no_msg_total = 0
     parse_data(data, dict_pos, dict_neg)
-    #print(dict_pos)
     no_words_pos = prob_word(dict_pos)
     no_words_neg = prob_word(dict_neg)
-    #prob_word(dict_pos)
-    #prob_word(dict_neg)
     print(testare("database.csv", dict_pos, dict_neg, no_words_pos, no_words_neg))
-    # print(no_pos / no_total)
-   # print(no_neg)
-   #  print(no_total)
-
-    # print(dict_neg)
-    #print(len(dict_pos))
-    #print(len(dict_neg))
