@@ -1,18 +1,17 @@
 
 def read_csv(file):
     data = []
-    f=open(file,"r",encoding='utf-8')
-    titles = f.readline().strip().split(";")
-    line=f.readline()
-    while line:
-        line = line.strip().split(";")
-        line.pop()
-        line[2]=line[3] #pt format
-        line.pop()
-        data.append(line)
-        line=f.readline()
+    with open(file, "r", encoding='utf-8') as f:
+        titles = f.readline().strip().replace('"', '').split(";")
+        line = f.readline()
+        while line:
+            line = line.strip().replace('"', '').replace('.',' ').replace('/', ' ').replace('(', ' ').replace(')',' ').replace('…', ' ').replace('>', ' ').replace('*', ' ').replace(',', ' ').replace('<', ' ').replace('?', ' ').split(";")
+            line.pop()
+            line[2] = line[3]  # pt format
+            line.pop()
+            data.append(line)
+            line = f.readline()
     return data
-
 
 def add_to_dict(dict, *lists):
     for list in lists:
@@ -24,12 +23,15 @@ def add_to_dict(dict, *lists):
 
 def parse_data(data, dict_pos, dict_neg):
     for i in range (len(data)):
-        words_title  = [x.strip(",:“”!/\*?'. ()[]").lower() for x in data[i][0].split()]
-        words_text = [x.strip(",:“”!/\*?'. ()[]").lower() for x in data[i][1].split()]
-        if data[i][2] == 0:
-            add_to_dict(dict_neg, words_title, words_text)
-        else:
-            add_to_dict(dict_pos, words_title, words_text)
+        words_title  = [x.strip(",:“”!/\*?'. ()[]_’‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{}").lower() for x in data[i][0].split()]
+        words_text = [x.strip(",:“”!/\*?'. ()[]’_‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{}").lower() for x in data[i][1].split()]
+        try:
+            if int(data[i][2]) == 0:
+                add_to_dict(dict_neg, words_title, words_text)
+            else:
+                add_to_dict(dict_pos, words_title, words_text)
+        except:
+            pass
 
 if __name__ == '__main__':
     data = read_csv("Reddit_Combi.csv")
@@ -37,5 +39,6 @@ if __name__ == '__main__':
     dict_pos = {}
     dict_neg = {}
     parse_data(data, dict_pos, dict_neg)
-    print(dict_pos)
+    #print(len(dict_pos))
+    #print(len(dict_neg))
 
