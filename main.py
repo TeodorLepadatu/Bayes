@@ -1,4 +1,4 @@
-
+import numpy as np
 def read_csv(file):
     data = []
     with open(file, "r", encoding='utf-8') as f:
@@ -51,22 +51,36 @@ def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
     for i in range (len(data)):
         words_title = [x.strip(",*:“”!/?'. ()[]_’‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][0].split()]
         words_text = [x.strip(",:*“”!/?'. ()[]’_‘-꒰⌯͒•̩̩̩́'ᴗ•̩̩̩̀⌯͒꒱↓~&—+{\\}").lower() for x in data[i][1].split()]
-        prob_pos = no_msg_pos / no_msg_total
-        prob_neg = no_msg_neg / no_msg_total
+        prob_pos = round(no_msg_pos / no_msg_total,10)
+        prob_neg = round(no_msg_neg / no_msg_total,10)
         for word in words_title:
             if word not in dict_pos:
-                dict_pos[word] = 1 / no_words_pos
+                dict_pos[word] = round(1 / no_words_pos, 10)
             if word not in dict_neg:
-                dict_neg[word] = 1 / no_words_neg
+                dict_neg[word] = round(1 / no_words_neg,10)
             prob_pos *= dict_pos[word]
             prob_neg *= dict_neg[word]
         for word in words_text:
+            '''
+            if word == 'yes':
+                print(prob_pos,prob_neg,dict_pos[word],dict_neg[word])
+            '''
             if word not in dict_pos:
-                dict_pos[word] = 1 / no_words_pos
+                dict_pos[word] = round(1 / no_words_pos, 10)
             if word not in dict_neg:
-                dict_neg[word] = 1 / no_words_neg
+                dict_neg[word] = round(1 / no_words_neg,10)
             prob_pos *= dict_pos[word]
             prob_neg *= dict_neg[word]
+            '''
+            if (prob_pos == 0):
+                print(word)
+                print("TIP CA SUNT 0")
+                break
+            if (prob_neg == 0):
+                print(word)
+                print("TIP CA SUNT 0")
+                break
+            '''
         ans = prob_pos > prob_neg
         try:
             nrcorecte+=(ans==int(data[i][2]))
@@ -82,6 +96,7 @@ if __name__ == '__main__':
     dict_neg = {}
     no_msg_pos = no_msg_neg = no_msg_total = 0
     parse_data(data, dict_pos, dict_neg)
+    #print(dict_pos)
     no_words_pos = prob_word(dict_pos)
     no_words_neg = prob_word(dict_neg)
     #prob_word(dict_pos)
@@ -90,7 +105,7 @@ if __name__ == '__main__':
     # print(no_pos / no_total)
    # print(no_neg)
    #  print(no_total)
-    # print(dict_neg)
+
     # print(dict_neg)
     #print(len(dict_pos))
     #print(len(dict_neg))
