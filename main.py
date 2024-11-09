@@ -53,7 +53,7 @@ def prob_word(dict):
         dict[key] = np.float64(dict[key] / no_words) * offset
     return no_words
 
-def testare(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
+def testing(file, dict_pos, dict_neg, no_words_pos, no_words_neg):
     global no_msg_pos, no_msg_neg, no_msg_total
     data = read_csv(file)
     nrcorecte = 0
