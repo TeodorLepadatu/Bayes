@@ -1,4 +1,4 @@
-## Clasificator Bayes multinomial
+# Clasificator Bayes multinomial
 
 Într-o lume în care rata depresiei și a altor afecțiuni emoționale sunt în continuă creștere, e important să fim constant atenți la sentimentele și semnalele pe care cei din jur ni le oferă. De cele mai multe ori, comunicarea se desfășoară pe rețelele de socializare, astfel încât, postările sau mesajele trimise pe acestea ajung să ascundă adevărate strigăte de ajutor.
 
@@ -6,11 +6,11 @@ Acest proiect implementează un clasificator Bayes multinomial, care primește u
 
 Pe datele utilizate de noi, clasificatorul reușește cu o acuratețe de 82.14% să identifice dacă autorul unei postări de pe Reddit prezintă sentimente negative, semne de anxietate sau depresie.
 
-# Formatul datelor
+## Formatul datelor
 
 În fișierele .csv, fiecare linie va reprezenta o postare sub forma title;body;Body Title;label; 
 
-# Funcții folosite
+## Funcții folosite
 
 În cadrul proiectului sunt folosite următoarele funcții:
 
@@ -39,13 +39,13 @@ Se parcurg cuvintele acesteia și probabilitatea de a i se atribui un anumit lab
 
 În final, postării i se atribuie label-ul a cărui probabilitate e mai mare și se compară cu label-ul de facto pentru a măsura acuratețea.
 
-# Resurse
+## Resurse
 
 Dataset: https://www.kaggle.com/datasets/mexwell/stress-detection-from-social-media-articles
 
 Naive Bayes Classifier: https://www.youtube.com/watch?v=O2L2Uv9pdDA
 
-# Instrucțiuni de utilizare
+## Instrucțiuni de utilizare
 
 	Se descarcă codul din fișierul main.py și dataset-ul de antrenament. Apoi se creează un nou fișier cu aceeași structură ca dataset-ul de antrenament și se rulează programul într-un editor de text ce are acces la un interpretor Python. Exemple de astfel de fișiere sunt Reddit_Combi.csv și database.csv.
 
