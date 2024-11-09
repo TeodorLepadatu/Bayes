@@ -20,7 +20,7 @@ Returnează obiectul data asociat fișierului .csv de forma title;body;Body Titl
 
 - *_parse_data (file, dict_pos, dict_neg)_*
 
-Se parcurge dataset-ul de antrenament și în funcție de label-ul mesajului curent (1 sau 0) cuvintele acestuia se introduc într-un dicționar: *_dict_pos_* - dacă label-ul e 1, *_dict_neg_* - în caz contrar. De asemenea, se numără câte mesaje din setul de antrenament sunt marcate cu 1 (*_no_msg_pos_*) și câte cu 0 (*_no_msg_neg_*), ca ulterior să se facă raportarea la numărul total de mesaje (*_no_msg_total_*) pe care a fost antrenat și a se calcula probabilitățile apriori ca o postare să aibă label-ul 1, respectiv 0.
+Se parcurge dataset-ul de antrenament și în funcție de label-ul mesajului curent (1 sau 0) cuvintele acestuia se introduc într-un dicționar: *_dict_pos_* - dacă label-ul e 1, *_dict_neg_* - în caz contrar. De asemenea, se numără câte mesaje din setul de antrenament sunt marcate cu 1 (**_no_msg_pos_**) și câte cu 0 (*_no_msg_neg_*), ca ulterior să se facă raportarea la numărul total de mesaje (*_no_msg_total_*) pe care a fost antrenat și a se calcula probabilitățile apriori ca o postare să aibă label-ul 1, respectiv 0.
 
 - *_prob_word (dict)_*
 
