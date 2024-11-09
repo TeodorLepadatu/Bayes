@@ -33,7 +33,7 @@ Funcția va returna numărul total de apariții ale cuvintelor din dict: *_no_wo
 Pentru un fișier dat și pe baza rezultatelor calculate anterior, funcția ia fiecare postare din file și îi pune acesteia un label. Pentru fiecare postare se iau în calcul cele două variante: la o primă vedere, fără a analiza conținutul ei, postarea poate avea:
 
 Label-ul 1, cu probabilitatea *_P(Pos)_* = no_msg_pos / no_msg_total
-Label-ul 0, cu probabilitatea *_P(Neg)_* = no_msg_neg / no_msd_total
+Label-ul 0, cu probabilitatea *_P(Neg)_* = no_msg_neg / no_msg_total
 
 Se parcurg cuvintele acesteia și probabilitatea de a i se atribui un anumit label este influențată de probabilitatea condiționată a cuvântului respectiv a apărea în mesajele cu label-ul respectiv: *_dict_pos[word] / dict_neg[word]_*.
 
