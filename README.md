@@ -8,7 +8,7 @@ Pe datele utilizate de noi, clasificatorul reușește cu o acuratețe de 82.14% 
 
 ## Formatul datelor
 
-În fișierele .csv, fiecare linie va reprezenta o postare sub forma title;body;Body Title;label; 
+În fișierele .csv, fiecare linie va reprezenta o postare sub forma _title;body;Body Title;label;_ 
 
 ## Funcții folosite
 
@@ -16,26 +16,26 @@ Pe datele utilizate de noi, clasificatorul reușește cu o acuratețe de 82.14% 
 
 - read_csv (file)
 
-Returnează obiectul data asociat fișierului .csv de forma title;body;Body Title;label;, eliminând coloana Body Title și spațiile de la final.
+Returnează obiectul data asociat fișierului .csv de forma title;body;Body Title;label; eliminând coloana _Body Title_ și spațiile de la final.
 
-- parse_data (file, dict_pos, dict_neg)
+- *_parse_data (file, dict_pos, dict_neg)_*
 
-Se parcurge dataset-ul de antrenament și în funcție de label-ul mesajului curent (1 sau 0) cuvintele acestuia se introduc într-un dicționar: dict_pos - dacă label-ul e 1, dict_neg - în caz contrar. De asemenea, se numără câte mesaje din setul de antrenament sunt marcate cu 1 (no_msg_pos) și câte cu 0 (no_msg_neg), ca ulterior să se facă raportarea la numărul total de mesaje (no_msg_total) pe care a fost antrenat și a se calcula probabilitățile apriori ca o postare să aibă label-ul 1, respectiv 0.
+Se parcurge dataset-ul de antrenament și în funcție de label-ul mesajului curent (1 sau 0) cuvintele acestuia se introduc într-un dicționar: *_dict_pos_* - dacă label-ul e 1, *_dict_neg_* - în caz contrar. De asemenea, se numără câte mesaje din setul de antrenament sunt marcate cu 1 (*_no_msg_pos_*) și câte cu 0 (*_no_msg_neg_*), ca ulterior să se facă raportarea la numărul total de mesaje (*_no_msg_total_*) pe care a fost antrenat și a se calcula probabilitățile apriori ca o postare să aibă label-ul 1, respectiv 0.
 
-- prob_word (dict)
+- *_prob_word (dict)_*
 
-Pentru fiecare cuvânt word din dicționar se calculează probabilitatea acestuia ca fiind numărul său de apariții / numărul total de apariții ale cuvintelor din dict și rezultatul obținut i se atribuie lui dict[word]. Astfel, după apelul funcției prob_word (dict_pos), dict[word] va reprezenta probabilitatea condiționată a lui word de a apărea într-o postare cu label-ul 1, P [word | Pos]. Analog pentru prob_word (dict_neg).
+Pentru fiecare cuvânt word din dicționar se calculează probabilitatea acestuia ca fiind numărul său de apariții / numărul total de apariții ale cuvintelor din dict și rezultatul obținut i se atribuie lui *_dict[word]_*. Astfel, după apelul funcției *_prob_word (dict_pos)_*, *_dict[word]_* va reprezenta probabilitatea condiționată a lui word de a apărea într-o postare cu label-ul 1, *_P [word | Pos]_*. Analog pentru prob_word (dict_neg).
 
-Funcția va returna numărul total de apariții ale cuvintelor din dict: no_words_pos, respectiv no_words_neg.
+Funcția va returna numărul total de apariții ale cuvintelor din dict: *_no_words_pos_*, respectiv *_no_words_neg_*.
 
-- testing (file, dict_pos, dict_neg, no_words_pos, no_words_neg)
+- *_testing (file, dict_pos, dict_neg, no_words_pos, no_words_neg)_*
 
 Pentru un fișier dat și pe baza rezultatelor calculate anterior, funcția ia fiecare postare din file și îi pune acesteia un label. Pentru fiecare postare se iau în calcul cele două variante: la o primă vedere, fără a analiza conținutul ei, postarea poate avea:
 
-- Label-ul 1, cu probabilitatea P(Pos) = no_msg_pos / no_msg_total
-- Label-ul 0, cu probabilitatea P(Neg) = no_msg_neg / no_msd_total
+Label-ul 1, cu probabilitatea *_P(Pos)_* = no_msg_pos / no_msg_total
+Label-ul 0, cu probabilitatea *_P(Neg)_* = no_msg_neg / no_msd_total
 
-Se parcurg cuvintele acesteia și probabilitatea de a i se atribui un anumit label este influențată de probabilitatea condiționată a cuvântului respectiv a apărea în mesajele cu label-ul respectiv: dict_pos[word] / dict_neg[word].
+Se parcurg cuvintele acesteia și probabilitatea de a i se atribui un anumit label este influențată de probabilitatea condiționată a cuvântului respectiv a apărea în mesajele cu label-ul respectiv: *_dict_pos[word] / dict_neg[word]_*.
 
 În final, postării i se atribuie label-ul a cărui probabilitate e mai mare și se compară cu label-ul de facto pentru a măsura acuratețea.
 
@@ -50,4 +50,3 @@ Se parcurg cuvintele acesteia și probabilitatea de a i se atribui un anumit lab
 Se descarcă codul din fișierul main.py și dataset-ul de antrenament. Apoi se creează un nou fișier cu aceeași structură ca dataset-ul de antrenament și se rulează programul într-un editor de text ce are acces la un interpretor Python. Exemple de astfel de fișiere sunt Reddit_Combi.csv și database.csv.
 
  
-	
