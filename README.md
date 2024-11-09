@@ -24,13 +24,13 @@ Se parcurge dataset-ul de antrenament și în funcție de label-ul mesajului cur
 
 prob_word (dict)
 
-	Pentru fiecare cuvânt word din dicționar se calculează probabilitatea acestuia ca fiind numărul său de apariții / numărul total de apariții ale cuvintelor din dict și rezultatul obținut i se atribuie lui dict[word]. Astfel, după apelul funcției prob_word (dict_pos), dict[word] va reprezenta probabilitatea condiționată a lui word de a apărea într-o postare cu label-ul 1, P [word | Pos]. Analog pentru prob_word (dict_neg).
+Pentru fiecare cuvânt word din dicționar se calculează probabilitatea acestuia ca fiind numărul său de apariții / numărul total de apariții ale cuvintelor din dict și rezultatul obținut i se atribuie lui dict[word]. Astfel, după apelul funcției prob_word (dict_pos), dict[word] va reprezenta probabilitatea condiționată a lui word de a apărea într-o postare cu label-ul 1, P [word | Pos]. Analog pentru prob_word (dict_neg).
 
 Funcția va returna numărul total de apariții ale cuvintelor din dict: no_words_pos, respectiv no_words_neg.
 
 testing (file, dict_pos, dict_neg, no_words_pos, no_words_neg)
 
-	Pentru un fișier dat și pe baza rezultatelor calculate anterior, funcția ia fiecare postare din file și îi pune acesteia un label. Pentru fiecare postare se iau în calcul cele două variante: la o primă vedere, fără a analiza conținutul ei, postarea poate avea:
+Pentru un fișier dat și pe baza rezultatelor calculate anterior, funcția ia fiecare postare din file și îi pune acesteia un label. Pentru fiecare postare se iau în calcul cele două variante: la o primă vedere, fără a analiza conținutul ei, postarea poate avea:
 
 Label-ul 1, cu probabilitatea P(Pos) = no_msg_pos / no_msg_total
 Label-ul 0, cu probabilitatea P(Neg) = no_msg_neg / no_msd_total
@@ -47,7 +47,7 @@ Naive Bayes Classifier: https://www.youtube.com/watch?v=O2L2Uv9pdDA
 
 ## Instrucțiuni de utilizare
 
-	Se descarcă codul din fișierul main.py și dataset-ul de antrenament. Apoi se creează un nou fișier cu aceeași structură ca dataset-ul de antrenament și se rulează programul într-un editor de text ce are acces la un interpretor Python. Exemple de astfel de fișiere sunt Reddit_Combi.csv și database.csv.
+Se descarcă codul din fișierul main.py și dataset-ul de antrenament. Apoi se creează un nou fișier cu aceeași structură ca dataset-ul de antrenament și se rulează programul într-un editor de text ce are acces la un interpretor Python. Exemple de astfel de fișiere sunt Reddit_Combi.csv și database.csv.
 
  
 	
