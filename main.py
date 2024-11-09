@@ -95,4 +95,4 @@ if __name__ == '__main__':
     parse_data(data, dict_pos, dict_neg)
     no_words_pos = prob_word(dict_pos)
     no_words_neg = prob_word(dict_neg)
-    print(testare("database.csv", dict_pos, dict_neg, no_words_pos, no_words_neg))
+    print(testing("database.csv", dict_pos, dict_neg, no_words_pos, no_words_neg))
